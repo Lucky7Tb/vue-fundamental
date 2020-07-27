@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Lucky Tri Bhakti</title>
+        <link rel="stylesheet" href="./css/bulma.min.css">
+        <style>
+            footer{
+                bottom: 0;
+                width: 100%;
+                height: 10px;
+                margin-top: 50px;
+            }
+
+            main nav{
+                margin-top: 25px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div id="app">
+            <div id="preloader" v-if="isPreLoaderShow">
+                <progress class="progress is-small is-primary" max="100">100%</progress>
+            </div>
+            <section class="hero">
+                <div class="hero-body">
+                    <div class="container has-text-centered">
+                        <h1 class="title">
+                            Vue.js Fundamental
+                        </h1>
+                        <h2 class="subtitle">
+                           Search Text On Video(Travesy Media Video-Vue Crash Course)
+                        </h2>
+                    </div>
+                </div>
+            </section>
+
+            <main class="container">
+                <div class="notification is-danger is-light" v-if="search.searchError">
+                    <button class="delete" @click="search.searchError = !search.searchError"></button>
+                    <p>{{search.searchErrorText}}</p>
+                </div>
+                <div class="columns">
+                    <div class="column is-6 is-offset-2">
+                        <div class="field">
+                            <input class="input is-rounded" id="searchForm" type="text" placeholder="Search text on video" v-model="search.searchForm" autofocus>
+                        </div>
+                        <h1>Total search: {{pagination.totalPage}}</h1>
+                    </div>
+                   <div class="column is-1">
+                        <button class="button is-info is-rounded" @click="searchKeyWord">Search</button>
+                   </div>
+                   <div class="column is-1">
+                        <button class="button is-rounded" @click="clear()">Clear</button>
+                   </div>
+                   <div class="column">
+                </div>
+                </div>
+
+                <div class="columns" v-if="data.length > 0">
+                    <div class="column" v-for="(value, index) in data" :key="index">
+                        <card :text="value.text" :url-video="value.start"></card>
+                    </div>
+                </div>
+                <div v-else>
+                    <h1 class="has-text-centered is-size-1">Yaaah Gaada Hasil nya :(</h1>
+                </div>
+
+                <nav class="level" role="navigation" aria-label="pagination">
+                    <div class="level-item has-text-centered">
+                        <button class="button is-rounded" :disabled="!pagination.firstPage" @click="searchVideo('firstPage')">First</button>
+                    </div>
+                    <div class="level-item has-text-centered">
+                        <button class="button is-rounded" :disabled="!pagination.previousPage" @click="searchVideo('previousPage')">Previous</button>
+                    </div>
+                    <div class="level-item has-text-centered">
+                        <button class="button is-rounded" :disabled="!pagination.nextPage" @click="searchVideo('nextPage')">Next page</button>
+                    </div>
+                    <div class="level-item has-text-centered">
+                        <button class="button is-rounded" :disabled="!pagination.lastPage" @click="searchVideo('lastPage')">Last</button>
+                    </div>
+                </nav>
+            </main>
+
+            <footer class="footer has-background-primary is-bold" :style="{position: data.length > 1 ? '' : 'fixed' }">
+                <div class="content has-text-centered">
+                   <p>Lucky Tri Bhakti &copy; 2020 - Made width &hearts;</p>
+                   <p><a href="https://ini.space/LuckyTb" target="_blank">About Me</a></p>
+                </div>
+            </footer>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script src="./js/app.js"></script>
+    </body>
+
+</html>
