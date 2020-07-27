@@ -31,7 +31,7 @@ Vue.component('card', {
         </div>
         <div class="card-content">
             <div class="media">
-                <div class="media-left">
+                <div class="media-left is-hidden-tablet-only">
                     <figure class="image is-48x48">
                         <img src="https://cdn.svgporn.com/logos/youtube.svg" alt="YoutubeLogo">
                     </figure>

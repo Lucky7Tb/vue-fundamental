@@ -43,21 +43,39 @@
                     <button class="delete" @click="search.searchError = !search.searchError"></button>
                     <p>{{search.searchErrorText}}</p>
                 </div>
-                <div class="columns">
+                <div class="columns is-hidden-mobile">
                     <div class="column is-6 is-offset-2">
                         <div class="field">
                             <input class="input is-rounded" id="searchForm" type="text" placeholder="Search text on video" v-model="search.searchForm" autofocus>
                         </div>
                         <h1>Total search: {{pagination.totalPage}}</h1>
                     </div>
-                   <div class="column is-1">
+                   <div class="column is-2 is-hidden-desktop">
                         <button class="button is-info is-rounded" @click="searchKeyWord">Search</button>
                    </div>
+                   <div class="column is-1 is-hidden-tablet-only">
+                        <button class="button is-info is-rounded" @click="searchKeyWord">Search</button>
+                    </div>
                    <div class="column is-1">
                         <button class="button is-rounded" @click="clear()">Clear</button>
                    </div>
-                   <div class="column">
                 </div>
+
+                <div class="columns is-mobile is-hidden-desktop is-hidden-tablet-only">
+                    <div class="column is-12">
+                        <div class="columns">
+                            <div class="column is-12">
+                                <div class="field">
+                                    <input class="input is-rounded" id="searchForm" type="text" placeholder="Search text" v-model="search.searchForm" autofocus>
+                                    <h1>Total search: {{pagination.totalPage}}</h1>
+                                </div>
+                            </div>
+                            <div class="column is-1">
+                                    <button class="button is-info is-rounded" @click="searchKeyWord">Search</button>
+                                    <button class="button is-rounded" @click="clear()">Clear</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="columns" v-if="data.length > 0">
@@ -68,21 +86,44 @@
                 <div v-else>
                     <h1 class="has-text-centered is-size-1">Yaaah Gaada Hasil nya :(</h1>
                 </div>
-
-                <nav class="level" role="navigation" aria-label="pagination">
+                
+                <nav class="level is-hidden-touch" role="navigation" aria-label="pagination">
                     <div class="level-item has-text-centered">
-                        <button class="button is-rounded" :disabled="!pagination.firstPage" @click="searchVideo('firstPage')">First</button>
+                        <button class="button is-rounded" :disabled="!pagination.firstPage" @click="searchVideo('firstPage')">First page</button>
                     </div>
                     <div class="level-item has-text-centered">
-                        <button class="button is-rounded" :disabled="!pagination.previousPage" @click="searchVideo('previousPage')">Previous</button>
+                        <button class="button is-rounded" :disabled="!pagination.previousPage" @click="searchVideo('previousPage')">Previous page</button>
                     </div>
                     <div class="level-item has-text-centered">
                         <button class="button is-rounded" :disabled="!pagination.nextPage" @click="searchVideo('nextPage')">Next page</button>
                     </div>
                     <div class="level-item has-text-centered">
-                        <button class="button is-rounded" :disabled="!pagination.lastPage" @click="searchVideo('lastPage')">Last</button>
+                        <button class="button is-rounded" :disabled="!pagination.lastPage" @click="searchVideo('lastPage')">Last page</button>
                     </div>
                 </nav>
+
+                <div class="columns is-mobile is-hidden-desktop">
+                    <div class="column">
+                        <div class="columns">
+                            <div class="column is-6 has-text-centered">
+                                <button class="button is-rounded" :disabled="!pagination.firstPage" @click="searchVideo('firstPage')">First page</button>
+                            </div>
+                            <div class="column is-6 has-text-centered">
+                                <button class="button is-rounded" :disabled="!pagination.lastPage" @click="searchVideo('lastPage')">Last page</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <div class="columns">
+                            <div class="column is-6 has-text-centered">
+                                <button class="button is-rounded" :disabled="!pagination.nextPage" @click="searchVideo('nextPage')">Next page</button>
+                            </div>
+                            <div class="column is-6 has-text-centered">
+                                <button class="button is-rounded" :disabled="!pagination.previousPage" @click="searchVideo('previousPage')">Previous page</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </main>
 
             <footer class="footer has-background-primary is-bold" :style="{position: data.length > 1 ? '' : 'fixed' }">
