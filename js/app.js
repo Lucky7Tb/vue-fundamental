@@ -1,4 +1,4 @@
-Vue.component('card', {
+Vue.component('app-card', {
     props: ["text", "urlVideo"],
     data(){
         return{
